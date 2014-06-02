@@ -4,9 +4,7 @@ dep 'common osx' do
     'command line tools',
     'zsh shell',
     'vim 7.3',
-    'poe hostname',
     'fonts',
-
     'osx ssd trim enabled',
   ].each{ |p| requires p }
 end
@@ -104,33 +102,26 @@ dep 'fonts' do
 end
 
 
-dep 'poe hostname' do
-  met? {
-    [
-      'scutil --get ComputerName',
-      'scutil --get HostName',
-      'scutil --get LocalHostName',
-      'defaults read /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName',
-    ].map{ |cmd| `#{cmd}`.strip }.uniq == ['poe']
-  }
-
-  meet {
-    hostname = 'poe'
-    [
-      "sudo scutil --set ComputerName '#{hostname}'",
-      "sudo scutil --set HostName '#{hostname}'",
-      "sudo scutil --set LocalHostName '#{hostname}'",
-      "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string '#{hostname}'",
-    ].map{ |cmd| `#{cmd}` }
-  }
-end
-
 dep 'vim 7.3' do
   met? {
     `vim --version |grep "Vi IMproved 7.3"`
   }
 end
 
+
+# Programming
+
+dep 'programming' do
+  requires 'clojure'
+end
+
+dep 'leiningen.managed' do
+  provides 'lein'
+end
+
+dep 'clojure' do
+  requires 'leiningen.managed'
+end
 
 # Unix Tools
 

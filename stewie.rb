@@ -1,8 +1,10 @@
 dep 'stewie' do
   [
     'common osx',
+
     'macbook powermode',
     'macbook hibernate image',
+
     'stewie hostname',
   ].each{ |p| requires p }
 end
@@ -45,5 +47,3 @@ dep 'macbook hibernate image' do
     not File.exists?('/var/vm/sleepimage')
   }
 end
-
-

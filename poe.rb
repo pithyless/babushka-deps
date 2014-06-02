@@ -1,17 +1,11 @@
 dep 'poe' do
   [
     'common osx',
-    'clojure',
+
+    'programming',
+
     'poe hostname',
   ].each{ |p| requires p }
-end
-
-dep 'leiningen.managed' do
-  provides 'lein'
-end
-
-dep 'clojure' do
-  requires 'leiningen.managed'
 end
 
 dep 'poe hostname' do
