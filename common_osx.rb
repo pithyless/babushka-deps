@@ -145,6 +145,8 @@ dep 'mercurial.managed' do
   provides 'hg'
 end
 
+dep 'ssh-copy-id.managed'
+
 dep 'zsh-completions.managed' do
   met? {
     `brew list zsh-completions` !~ /No such keg/
@@ -152,7 +154,7 @@ dep 'zsh-completions.managed' do
 end
 
 dep 'command line tools' do
-  %w{ack wget curl git unrar htop-osx wordnet}.each do |tool|
+  %w{ack wget curl git unrar htop-osx wordnet ssh-copy-id}.each do |tool|
     requires "#{tool}.managed"
   end
 end
